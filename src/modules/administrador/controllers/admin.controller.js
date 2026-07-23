@@ -101,5 +101,15 @@ class AdminController {
     } catch (error) {
       return resposta.status(500).json({mensagem: "Erro interno ao realizar login!", erro: error.message});
     }
+  static async perfil(requisicao, resposta){
+    try {
+      const administrador = await AdminModel.buscarPorEmail(requisicao.administrador.email);
+      if (administrador.length === 0) {
+        return resposta.status(409).json({ mensagem: "Usuário precisa fazer login!" });
+      }
+      return resposta.status(200).json(administrador);
+    } catch (error) {
+      return resposta.status(500).json({ mensagem: "Erro ao buscar perfil do administrador!", erro: error.message });
+    }
   }
 }
