@@ -1,12 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import router from "./modules/inspecao/routes/inspecao.route.js";
+import routerAdmin from "./modules/administrador/routes/admin.routes.js";
+
 dotenv.config();
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
-app.use(router)
+
+app.use("/admin", routerAdmin);
+app.use("/inspecao", router);
 
 const porta = process.env.PORTA;
 

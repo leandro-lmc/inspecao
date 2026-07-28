@@ -1,12 +1,12 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import AdminModel from "..models/AdminModel.js";
+import AdminModel from "../models/admin.model.js";
 
 class AdminController {
   static async cadastrar(requisicao, resposta) {
     try {
-      const { id, nome, email, senha } = requisicao.body;
-      if (!id || !nome || !email || !senha) {
+      const { nome, email, senha } = requisicao.body;
+      if (!nome || !email || !senha) {
         return resposta
           .status(400)
           .json({ mensagem: "Todos os campos são obrigatórios!" });
@@ -45,7 +45,7 @@ class AdminController {
       }
       const salt = bcrypt.genSaltSync(10);
       const hashSenha = bcrypt.hashSync(senha, salt);
-      await AdminModel.cadastrar(id, nome, email, (senha = hashSenha));
+      await AdminModel.cadastrar(nome, email, hashSenha);
       return resposta
         .status(201)
         .json({ mensagem: "Usuário administrador cadastrado com sucesso!" });
@@ -91,7 +91,7 @@ class AdminController {
         },
         process.env.JWT_SECRET,
         { 
-            expiresIn: process.env.JWT_TEMPO_EXPIRACAO || "1h" 
+            expiresIn: process.env.JWT_TEMPO_EXPIRACAO 
         },
       );
       return resposta
@@ -101,15 +101,18 @@ class AdminController {
     } catch (error) {
       return resposta.status(500).json({mensagem: "Erro interno ao realizar login!", erro: error.message});
     }
-  static async perfil(requisicao, resposta){
-    try {
-      const administrador = await AdminModel.buscarPorEmail(requisicao.administrador.email);
+  }
+  
+  static async perfil(requisicao, resposta) {
+        try {
+      const administrador = await AdminModel.buscarPorEmail(requisicao.administrador.email)
       if (administrador.length === 0) {
         return resposta.status(409).json({ mensagem: "Usuário precisa fazer login!" });
       }
       return resposta.status(200).json(administrador);
     } catch (error) {
-      return resposta.status(500).json({ mensagem: "Erro ao buscar perfil do administrador!", erro: error.message });
+      return resposta.status(500).json({ mensagem: "Erro ao buscar perfil do administrador!", erro: error.message});
     }
   }
 }
+export default AdminController;
