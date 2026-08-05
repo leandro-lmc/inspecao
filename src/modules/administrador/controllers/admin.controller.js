@@ -11,12 +11,9 @@ class AdminController {
           .status(400)
           .json({ mensagem: "Todos os campos são obrigatórios!" });
       }
-      const totalAdmin = await AdminModel.contarAdmins();
-      if (totalAdmin > 0) {
-        return resposta
-          .status(409)
-          .json({
-            mensagem: "Já existe um administrador cadastrado com este email!",
+      const totalAdmin = await AdminModel.verificarAdminAtivo();
+        if (totalAdmin > 0) {
+        return resposta.status(409).json({mensagem: "Existe um administrador ativo ou o email já está em uso!",
           });
       }
       if (senha.length < 8) {
@@ -67,7 +64,7 @@ class AdminController {
           .json({ mensagem: "Todos os campos são obrigatórios!" });
       }
       const administrador = await AdminModel.buscarPorEmail(email);
-      if (administrador.length === 0) {
+      if (!administrador) {
         return resposta
           .status(404)
           .json({ mensagem: "Administrador não encontrado!" });
@@ -105,9 +102,10 @@ class AdminController {
   
   static async perfil(requisicao, resposta) {
         try {
-      const administrador = await AdminModel.buscarPorEmail(requisicao.administrador.email)
-      if (administrador.length === 0) {
-        return resposta.status(409).json({ mensagem: "Usuário precisa fazer login!" });
+      const idDoToken = requisicao.usuario.id;
+      const administrador = await AdminModel.buscarPorId(idDoToken);
+      if (!administrador) {
+        return resposta.status(404).json({ mensagem: "Administrador não encontrado!" });
       }
       return resposta.status(200).json(administrador);
     } catch (error) {

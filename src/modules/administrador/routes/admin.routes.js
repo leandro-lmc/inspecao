@@ -7,7 +7,7 @@ const routerAdmin = express.Router();
 routerAdmin.post('/cadastrar', AdminController.cadastrar)
 routerAdmin.post('/login', AdminController.login)
 // rota privada
-routerAdmin.get('/perfil/:email', autenticacaoMiddleware.autenticar, AdminController.perfil)
+routerAdmin.get('/perfil', autenticacaoMiddleware.autenticar, AdminController.perfil)
 
 
 export default routerAdmin

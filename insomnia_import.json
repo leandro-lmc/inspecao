@@ -1,0 +1,281 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-08-04T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:2026.1.0",
+  "resources": [
+    {
+      "_id": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "name": "atividade_inspecao",
+      "description": "Workspace de importação do Insomnia para a API de inspeção e administrador.",
+      "scope": "workspace",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_health_check",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/",
+      "name": "Health Check",
+      "description": "Verificar se a API está funcionando.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_admin_cadastrar",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/admin/cadastrar",
+      "name": "Admin: Cadastrar",
+      "description": "Cadastrar novo administrador. Todos os campos são obrigatórios.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Administrador Teste\",\n  \"email\": \"admin@teste.com\",\n  \"senha\": \"Senha@1234\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_admin_login",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/admin/login",
+      "name": "Admin: Login",
+      "description": "Autenticar administrador e receber token JWT.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@teste.com\",\n  \"senha\": \"Senha@1234\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_admin_perfil",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/admin/perfil",
+      "name": "Admin: Perfil",
+      "description": "Buscar perfil do administrador autenticado. Use Authorization: Bearer <TOKEN>.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_listar_todos",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/listar",
+      "name": "Inspeção: Listar Todos",
+      "description": "Listar todas as inspeções. Requer autenticação.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_listar_por_codigo",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/listar/123",
+      "name": "Inspeção: Listar por Código",
+      "description": "Buscar inspeção pelo código. Requer autenticação.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_cadastrar",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/cadastrar",
+      "name": "Inspeção: Cadastrar",
+      "description": "Cadastrar nova inspeção. Todos os campos são obrigatórios.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"codigo\": \"123\",\n  \"item_inspecionado\": \"Porta principal\",\n  \"data_inspecao\": \"2026-08-04\",\n  \"resultado\": \"Aprovado\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_editar_total",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/editar/total/123",
+      "name": "Inspeção: Editar Total",
+      "description": "Editar todos os campos de uma inspeção existente. Requer autenticação.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"item_inspecionado\": \"Porta secundária\",\n  \"data_inspecao\": \"2026-08-05\",\n  \"resultado\": \"Reprovado\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_editar_parcial",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/editar/parcial/123",
+      "name": "Inspeção: Editar Parcial",
+      "description": "Editar parcialmente uma inspeção. Requer autenticação.",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"resultado\": \"Aprovado\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_excluir_por_codigo",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/excluir/123",
+      "name": "Inspeção: Excluir por Código",
+      "description": "Excluir uma inspeção específica por código. Requer autenticação.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_inspecao_excluir_todos",
+      "parentId": "wrk_atividade_inspecao",
+      "created": "2026-08-04T12:00:00.000Z",
+      "modified": "2026-08-04T12:00:00.000Z",
+      "url": "http://localhost:3000/inspecao/excluir",
+      "name": "Inspeção: Excluir Todos",
+      "description": "Excluir todas as inspeções cadastradas. Requer autenticação.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer <TOKEN_AQUI>"
+        }
+      ],
+      "authentication": {
+        "type": "none"
+      },
+      "_type": "request"
+    }
+  ]
+}
